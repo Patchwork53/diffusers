@@ -951,7 +951,9 @@ class UNet2DConditionModel(ModelMixin, ConfigMixin, UNet2DConditionLoadersMixin)
                 emb = emb + class_emb
 
         if self.config.addition_embed_type == "text":
+            print("unet_2d_condition.py, encoder_hidden_states.shape:",encoder_hidden_states.shape)
             aug_emb = self.add_embedding(encoder_hidden_states)
+            print("unet_2d_condition.py, aug_emb.shape:",aug_emb.shape)
         elif self.config.addition_embed_type == "text_image":
             # Kandinsky 2.1 - style
             if "image_embeds" not in added_cond_kwargs:
