@@ -868,6 +868,8 @@ class UNet2DConditionModel(ModelMixin, ConfigMixin, UNet2DConditionLoadersMixin)
         # The overall upsampling factor is equal to 2 ** (# num of upsampling layers).
         # However, the upsampling interpolation output size can be forced to fit any upsampling size
         # on the fly if necessary.
+
+        print("unet_2d_condition.py. Entered forward", flush=True)
         default_overall_up_factor = 2**self.num_upsamplers
 
         # upsample size should be forwarded when sample is not a multiple of `default_overall_up_factor`
@@ -953,7 +955,7 @@ class UNet2DConditionModel(ModelMixin, ConfigMixin, UNet2DConditionLoadersMixin)
         if self.config.addition_embed_type == "text":
             print("unet_2d_condition.py, encoder_hidden_states.shape:",encoder_hidden_states.shape)
             aug_emb = self.add_embedding(encoder_hidden_states)
-            print("unet_2d_condition.py, aug_emb.shape:",aug_emb.shape)
+            print("unet_2d_condition.py, aug_emb.shape:",aug_emb.shape, flush=True)
         elif self.config.addition_embed_type == "text_image":
             # Kandinsky 2.1 - style
             if "image_embeds" not in added_cond_kwargs:
